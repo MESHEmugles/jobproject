@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static%}
+
+{% block content %}
+<head>
+    <style>
+        .maindiv{
+            border:1px solid black;
+        }
+    </style>
+</head>
+<br><br>
+<div class="maindiv jumbotron container ">
+    <div>
+        <p><a href="{% url 'jobapp:index' %}"><strong>Home</strong></a></p>
+    </div>
+    <form method="POST" action="{% url 'jobapp:login' %}" class="py-4">
+        {% csrf_token %}
+        <p><input type="text" name="username" placeholder="Username..."></p>
+        <p><input type="password" name="password" placeholder="Password..." ></p>
+        <input class="btn btn-success" type="submit" value="Login">
+        <p>Do not have an account<a href='{% url "jobapp:register_employer" %}'>Register</a></p>
+    </form>
+
+</div>
+{% endblock %}

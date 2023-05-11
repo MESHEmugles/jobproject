@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+
+<!-- title section -->
+
+{%block navbar%}
+{% include 'home/navbar.html' %}     
+{% endblock %}
+
+<!--content -->
+{% block content %}
+<div class="col-12 bg-light">
+    <br><br><br>
+    <form action="{% url 'jobapp:apply' jobdetails.pk  %}" method="POST" class="sign w-75 mx-auto" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <button type="submit" class="btn btn-success mi mb-4">Submit</button>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static%}
+
+{% block content %}
+<head>
+    <style>
+        .maindiv{
+            border:1px solid black;
+        }
+    </style>
+</head>
+<div class="maindiv jumbotron container">
+    <div>
+        <p><a href="{% url 'jobapp:index' %}"><strong>Home</strong></a></p>
+    </div>
+    <form method="POST"  action="{% url 'jobapp:register_employer' %}" class="py-4">
+        {% csrf_token %}
+        {{form.as_p}}
+        <div class="form-group">
+            <label for="inputEmail4">Company Contact</label>
+            <input type="text" name="company_contact" class="form-control bg-transparent" required>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail4">Company Name</label>
+            <input type="text" name="company_name" class="form-control bg-transparent" required>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail4">Website</label>
+            <input type="url" name="website" class="form-control bg-transparent" required>
+        </div>
+        <input class="btn btn-success btn-lg" type="submit" name="employer" value="Register">
+        <p>Already have an account<a href='{% url "jobapp:login" %}'>Login</a></p>
+    </form>
+
+</div>
+{% endblock %}

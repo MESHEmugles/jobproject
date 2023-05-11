@@ -1,0 +1,92 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+
+<!-- title section -->
+
+
+{%block navbar%}
+{% include 'home/navbar.html' %}     
+{% endblock %}
+
+<!--content -->
+{% block content %}
+<div class="container-flui">
+    <div class="row justify-content-start">
+        <div class="col-12 col-md-3">
+            <nav class="navbar navbar-expand-sm navbar-light bg-transparent nav-edit">
+                <a class="navbar-toggler border-0" type="button" data-toggle="collapse" href="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <!-- <span class="navbar-toggler-icon"></span> -->
+                    <span class="navbar-toggler-icon rounded log" style="font-size: 1rem;"></span>
+                    <!-- <span><strong>SideBar</strong></span> -->
+                </a>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="display: inline-block;">
+                        <a class="nav-link mb-3 link-edit" href="#"><i class="fas fa-files"></i>Dashboard <i class="fas fa-files text-primary"></i></a>
+                        <a class="nav-link mb-3 profdit" href="{% url 'employerprofile:proedit' %}">Update</a>
+                        <a class="nav-link mb-3 link-edit" href="{% url 'employerprofile:create_job' %}">Post Job</a>
+                        <a class="nav-link mb-3 link-edit active" href="#item-1">Job Posted</a>
+                        <a class="nav-link profditt mb-3" href="{% url 'employerprofile:profile' %}"> Profile </a>
+                        <a class="nav-link mb-3 profdit" href="#">Change Password</a>
+                        <a class="nav-link mb-3 link-edit" href="#">Appointment</a>
+                        <a class="nav-link mb-3 link-edit" href="#">Prescription</a>
+                        <a class="nav-link text-muted link-editt" href="#"><small>Help And Support</small></a>
+                        <a class="nav-link text-muted link-edite" href="#">Preferences</a>
+                    </ul>
+                </div>
+            </nav>  
+        </div>
+        <div class="col-12 col-md-9 profile-col">
+            <div data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+                <p id="item-1">
+                    <!-- Jobs Start -->
+                    <div class="container-xxl py-5">
+                        <div class="container">
+                            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
+                            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                                        <div class="job-item p-4 mb-4">
+                                            {% if list %}
+                                                {% for i in list %}
+                                                    <div class="row g-4">
+                                                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                                            <img class="flex-shrink-0 img-fluid border rounded" src="{% static '' %}img/com-logo-1.jpg" alt="" style="width: 80px; height: 80px;">
+                                                            <div class="text-start ps-4">
+                                                                <h5 class="mb-3">{{ i.title }}</h5>
+                                                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ i.Location }}</span>
+                                                                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ i.get_type_display }}</span>
+                                                                {% if i.salaryrange == Null %}
+                                                                    <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ i.salary }}</span>
+                                                                {% else %}
+                                                                    <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ i.salaryrange }}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                                            <div class="d-flex mb-3">
+                                                                <a class="btn btn-light btn-square me-3" href="#"><i class="far fa-heart text-primary"></i></a>
+                                                                <a class="btn btn-primary" href="{% url 'jobapp:apply' i.pk %}">Apply Now</a>
+                                                            </div>
+                                                            <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ i.last_date }}</small>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Jobs End -->
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

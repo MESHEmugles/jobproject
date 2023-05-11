@@ -1,0 +1,29 @@
+{% extends "main.html" %} {% load static %} 
+
+
+{%block navbar%}
+{% include 'home/navbar.html' %}     
+{% endblock %}
+
+{% block content%}
+<!-- Jobs Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <p class="mb-4"><a href="{% url 'employerprofile:create_job' object.pk %}">edit</a></p>
+        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+            <h1 class="mb-4">{{ object.title }}</h1>
+            <p><i class="fa fa-check text-primary me-3"></i>{{ object.Location }}</p>
+            <p class="mb-4"> {{ object.type }} </p>
+            <p><i class="fa fa-check text-primary me-3"></i>{{ object.description }}</p>
+            {% if object.salaryrange == Null %}
+                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ object.salary }}</span>
+            {% else %}
+                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ object.salaryrange }}</span>
+            {% endif %}
+            <p><i class="fa fa-check text-primary me-3"></i>{{ object.company_name }}</p>
+            <a class="btn btn-primary py-3 px-5 mt-3" href="{% url 'jobapp:apply' object.pk %}">Apply</a>
+        </div>
+    </div>
+</div>
+<!-- Jobs End -->
+{% endblock %}
